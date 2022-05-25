@@ -48,14 +48,14 @@ files.each do |f|
 
     elsif name_base.include?("vintage")
 
-      baguette = baguette_calc(710.0, name_dimension)
+      baguette = baguette_calc(860.0, name_dimension)
 
       system("exiftool -overwrite_original -comment=#{baguette} #{f}")
       puts "#{f}\nBaguette => #{baguette}...\n----------------------\n\n"
 
     elsif name_base.include?("ancient")
 
-      baguette = baguette_calc(225.0, name_dimension)
+      baguette = baguette_calc(475.0, name_dimension)
 
       system("exiftool -overwrite_original -comment=#{baguette} #{f}")
       puts "#{f}\nBaguette => #{baguette}...\n----------------------\n\n"
@@ -111,6 +111,7 @@ def homothetie_calc
       x=`exiftool -s -s -s -comment #{f}`
       x = x.to_f.round
       x = 1000 - x
+      x /= 2
 
       puts "Baguette's width => #{x}"
 
@@ -125,7 +126,7 @@ def homothetie_calc
       system("magick #{f} -liquid-rescale #{ratio}x100% \
               -font GTEestiProText-Bold -pointsize 100 -kerning 2 \
               -gravity center -fill '#355548' -annotate +0-50 #{new_size} \
-              -background none -size 450x -font GTEestiProText-Medium -pointsize 25 -kerning 3 -fill '#355548' \
+              -background none -size 400x -font GTEestiProText-Medium -pointsize 25 -kerning 3 -fill '#355548' \
               caption:'#{new_name.gsub(/-/, '\ ').upcase + " FRAME"}' \
               -gravity center -geometry +0+20 -compose over -composite \
               -font GTEestiProText-Medium -pointsize 20 -interline-spacing 8 -kerning 3 \
@@ -136,12 +137,22 @@ def homothetie_calc
 
       system("composite -compose Screen REFLECTION/#{rand(1..3)}.png #{new_name_temp} #{mask_name} #{new_name_temp}")
 
-      # resize_format = %w(1000x1000 700x700 450x450) # TODO: rajouter les 450x450 après les tests
-      # resize_format.each do |resize|
-      #   new_path_name = "FRAME/#{new_size + "/" + resize + "/" + new_size + "-" + new_name}.jpg"
-      #   # system("yoga image -v --resize #{resize} --jpeg-quality 90 #{new_name_temp} #{new_path_name}")
-      #   system("magick #{new_name_temp} -resize #{resize} #{new_path_name}") # no optimisation
-      # end
+      resize_format = %w(x1000) # TODO: rajouter les  x700 x450 après les tests
+      resize_format.each do |resize|
+        new_path_name = "FRAME/#{new_size + "/" + resize + "/" + new_size + "-" + new_name}.jpg"
+        # system("yoga image -v --resize #{resize} --jpeg-quality 90 #{new_name_temp} #{new_path_name}")
+        system("magick #{new_name_temp} -resize #{resize} #{new_path_name}") # no optimisation
+      end
+
+      # DLIP / BLOB
+
+      new_dlip_path_name = "FRAME/#{new_size + "/1x1/" + new_size + "-" + new_name}.jpg"
+      system("magick #{new_name_temp} -strip \
+              -resize x450 \
+              -quality 20% \
+              -blur 5x3 \
+              -interlace plane \
+              #{new_dlip_path_name}")
 
       puts "\nImage processed !"
     end
@@ -150,12 +161,6 @@ end
 
 
 homothetie_calc
-
-  # image      = Magick::Image.from_blob(URI.parse(original_link(product)).open.read).first
-  # blob_image = image.resize_to_fit!(450).strip!.blur_image(5, 3).to_blob do |img|
-  #   img.quality   = 20
-  #   img.format    = 'JPEG'
-  #   img.interlace = Magick::PlaneInterlace
 
   # i18n = {
   #   'fr' => {
