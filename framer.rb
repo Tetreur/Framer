@@ -105,7 +105,7 @@ def homothetie_calc
       ratio = new_width * 100 / width
       ratio = ratio.round
 
-      puts "\n----------------------\n\nFile        => #{f}\nFolder(s)   => #{new_size + "/"}\nNew width   => #{new_width}\nNew ratio   => #{ratio}\n\nProcessing  => #{new_name_temp}\n"
+      puts "\n--------------------------------------------\n\nFile                => #{f}\nDestination Folder  => #{new_size + "/"}\nNew width           => #{new_width}\nNew ratio           => #{ratio}\n\nProcessing          => #{new_name_temp}\n"
       mask_name = "FRAME/#{new_size + "-" + new_name}-MASK.jpg"
 
       x=`exiftool -s -s -s -comment #{f}`
@@ -113,7 +113,7 @@ def homothetie_calc
       x = 1000 - x
       x /= 2
 
-      puts "Baguette's width => #{x}"
+      puts "Baguette's width    => #{x}px"
 
       system("magick -size 1000x1000 xc:white \
               -liquid-rescale #{ratio}x100% \
@@ -121,7 +121,7 @@ def homothetie_calc
               -mattecolor black -frame #{x} \
               #{mask_name}")
 
-      puts "Mask created => #{mask_name}"
+      puts "Mask created        => #{mask_name}"
 
       system("magick #{f} -liquid-rescale #{ratio}x100% \
               -font GTEestiProText-Bold -pointsize 100 -kerning 2 \
@@ -130,18 +130,18 @@ def homothetie_calc
               caption:'#{new_name.gsub(/-/, '\ ').upcase + " FRAME"}' \
               -gravity center -geometry +0+20 -compose over -composite \
               -font GTEestiProText-Medium -pointsize 20 -interline-spacing 8 -kerning 3 \
-              -background none -fill '#355548' -font GTEestiProText-Medium -pointsize 20 -interline-spacing 8 -kerning 3 \
+              -background none -fill '#1A1B1B' -font GTEestiProText-Medium -pointsize 20 -interline-spacing 8 -kerning 3 \
               -gravity center -annotate +0-300 'PREMIUM QUALITY FRAME\nWITH PROTECTIVE PLEXIGLAS' \
               LOGO.png -geometry +0+275 -composite \
               #{new_name_temp}")
 
       system("composite -compose Screen REFLECTION/#{rand(1..3)}.png #{new_name_temp} #{mask_name} #{new_name_temp}")
 
-      resize_format = %w(x1000) # TODO: rajouter les  x700 x450 après les tests
+      resize_format = %w(1000 700 450)
       resize_format.each do |resize|
-        new_path_name = "FRAME/#{new_size + "/" + resize + "/" + new_size + "-" + new_name}.jpg"
-        # system("yoga image -v --resize #{resize} --jpeg-quality 90 #{new_name_temp} #{new_path_name}")
-        system("magick #{new_name_temp} -resize #{resize} #{new_path_name}") # no optimisation
+        new_path_name = "FRAME/#{new_size + "/" + resize + "x" + resize + "/" + new_size + "-" + new_name}.jpg"
+        system("yoga image -v --resize #{resize + "x" + resize} --jpeg-quality 90 #{new_name_temp} #{new_path_name}")
+        # system("magick #{new_name_temp} -resize x#{resize} #{new_path_name}") # no optimisation
       end
 
       # DLIP / BLOB
@@ -242,7 +242,6 @@ homothetie_calc
 
   #   'es' => [],
   #   'it' => [],
-  #   'de' => [],
   #   'nl' => [],
   #   'sv' => []
   # }
