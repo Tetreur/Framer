@@ -32,7 +32,7 @@ files.each do |f|
 
     baguette = baguette_calc(200.0, name_dimension)
 
-    system("exiftool -comment=#{baguette} #{f}")
+    system("exiftool -overwrite_original -comment=#{baguette} #{f}")
     system("magick #{f} -gravity center \\( -clone 0 -crop 936x936+0+0 -resize \"#{baguette}x#{baguette}+0+0\" \\) -geometry +0+0 -composite #{f}")
     puts "#{f}\nBaguette => #{baguette}\n----------------------\n\n"
 
@@ -42,26 +42,29 @@ files.each do |f|
 
       baguette = baguette_calc(800.0, name_dimension)
 
-      system("exiftool -comment=#{baguette} #{f}")
+      system("exiftool -overwrite_original -comment=#{baguette} #{f}")
       system("magick #{f} -gravity center \\( -clone 0 -crop 788x788+0+0 -resize \"#{baguette}x#{baguette}+0+0\" \\) -geometry +0+0 -composite #{f}")
       puts "#{f}\nBaguette => #{baguette}\n----------------------\n\n"
 
     elsif name_base.include?("vintage")
-      baguette = baguette_calc(700.0, name_dimension)
 
-      system("exiftool -comment=#{baguette} #{f}")
+      baguette = baguette_calc(710.0, name_dimension)
+
+      system("exiftool -overwrite_original -comment=#{baguette} #{f}")
       puts "#{f}\nBaguette => #{baguette}...\n----------------------\n\n"
+
+    elsif name_base.include?("ancient")
 
       baguette = baguette_calc(225.0, name_dimension)
 
-      system("exiftool -comment=#{baguette} #{f}")
+      system("exiftool -overwrite_original -comment=#{baguette} #{f}")
       puts "#{f}\nBaguette => #{baguette}...\n----------------------\n\n"
 
     else
 
       baguette = baguette_calc(400.0, name_dimension)
 
-      system("exiftool -comment=#{baguette} #{f}")
+      system("exiftool -overwrite_original -comment=#{baguette} #{f}")
       system("magick #{f} -gravity center \\( -clone 0 -crop 880x880+0+0 -resize \"#{baguette}x#{baguette}+0+0\" \\) -geometry +0+0 -composite #{f}")
       puts "#{f}\nBaguette => #{baguette}\n----------------------\n\n"
 
@@ -89,7 +92,6 @@ def homothetie_calc
     '140x140' =>    ['100x140'] # On ne vend pas pour l'instant
   }
 
-
   Dir.glob('FRAME/*.jpg').each do |f|
 
     size, material, color, style, thickness = f.split('/').last[0..-5].split('_')
@@ -104,31 +106,27 @@ def homothetie_calc
       ratio = ratio.round
 
       puts "\n----------------------\n\nFile        => #{f}\nFolder(s)   => #{new_size + "/"}\nNew width   => #{new_width}\nNew ratio   => #{ratio}\n\nProcessing  => #{new_name_temp}\n"
+      mask_name = "FRAME/#{new_size + "-" + new_name}-MASK.jpg"
 
-      puts "Creating mask for #{size + "_" +new_name}"
-      x = system("exiftool -s -S -comment #{f}")
-      y = 1000 - f.to_i
-      system("convert -size 1000x1000 xc:black -fill white -draw  'polygon #{y},#{y} #{y},#{x} #{x},#{x} #{x},#{y}' #{f[0..-5]}_MASK.jpg")
+      x=`exiftool -s -s -s -comment #{f}`
+      x = x.to_f.round
+      x = 1000 - x
 
-      # system(" magick #{f} -liquid-rescale #{ratio}x100% \
-      #         -font GTEestiProText-Bold -pointsize 100 -kerning 2 \
-      #         -gravity center -fill '#355548' -annotate +0-50 #{new_size} \
-      #         -background none -size 470x -font GTEestiProText-Medium -pointsize 25 -kerning 3 -fill '#355548' \
-      #         caption:'#{new_name.gsub(/_/, '\ ').upcase + " FRAME"}' \
-      #         -gravity center -geometry +0+20 -compose over -composite \
-      #         -font GTEestiProText-Medium -pointsize 20 -interline-spacing 8 -kerning 3 \
-      #         -background none -fill '#355548' -font GTEestiProText-Medium -pointsize 20 -interline-spacing 8 -kerning 3 \
-      #         -gravity center -annotate +0-300 'PREMIUM QUALITY FRAME\nWITH PROTECTIVE PLEXIGLAS' \
-      #         LOGO.png -geometry +0+275 -composite \
-      #         -compose Screen -gravity center \
-      #         REFLECTION/#{rand(1..3)}.jpg #{f} \
-      #         #{new_name_temp} && display #{new_name_temp} && rm #{new_name_temp}")
+      puts "Baguette's width => #{x}"
 
-      system(" magick #{f} -liquid-rescale #{ratio}x100% \
+      system("magick -size 1000x1000 xc:white \
+              -liquid-rescale #{ratio}x100% \
+              -shave #{x}x#{x} \
+              -mattecolor black -frame #{x} \
+              #{mask_name}")
+
+      puts "Mask created => #{mask_name}"
+
+      system("magick #{f} -liquid-rescale #{ratio}x100% \
               -font GTEestiProText-Bold -pointsize 100 -kerning 2 \
               -gravity center -fill '#355548' -annotate +0-50 #{new_size} \
-              -background none -size 470x -font GTEestiProText-Medium -pointsize 25 -kerning 3 -fill '#355548' \
-              caption:'#{new_name.gsub(/_/, '\ ').upcase + " FRAME"}' \
+              -background none -size 450x -font GTEestiProText-Medium -pointsize 25 -kerning 3 -fill '#355548' \
+              caption:'#{new_name.gsub(/-/, '\ ').upcase + " FRAME"}' \
               -gravity center -geometry +0+20 -compose over -composite \
               -font GTEestiProText-Medium -pointsize 20 -interline-spacing 8 -kerning 3 \
               -background none -fill '#355548' -font GTEestiProText-Medium -pointsize 20 -interline-spacing 8 -kerning 3 \
@@ -136,11 +134,14 @@ def homothetie_calc
               LOGO.png -geometry +0+275 -composite \
               #{new_name_temp}")
 
-      resize_format = %w(1000x1000 700x700) # TODO: rajouter les 450x450 après les tests
-      resize_format.each do |resize|
-        new_path_name = "FRAME/#{new_size + "/" + resize + "/" + new_size + "-" + new_name}.jpg"
-        system("yoga image -v --resize #{resize} --jpeg-quality 90 #{new_name_temp} #{new_path_name}")
-      end
+      system("composite -compose Screen REFLECTION/#{rand(1..3)}.png #{new_name_temp} #{mask_name} #{new_name_temp}")
+
+      # resize_format = %w(1000x1000 700x700 450x450) # TODO: rajouter les 450x450 après les tests
+      # resize_format.each do |resize|
+      #   new_path_name = "FRAME/#{new_size + "/" + resize + "/" + new_size + "-" + new_name}.jpg"
+      #   # system("yoga image -v --resize #{resize} --jpeg-quality 90 #{new_name_temp} #{new_path_name}")
+      #   system("magick #{new_name_temp} -resize #{resize} #{new_path_name}") # no optimisation
+      # end
 
       puts "\nImage processed !"
     end
