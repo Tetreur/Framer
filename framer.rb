@@ -79,15 +79,15 @@ def homothetie_calc
           white: "Cadre bois blanc",
           black: "Cadre bois noir",
           oak: "Cadre bois chêne",
-          white_wide: "Cadre bois blanc large",
-          black_whide: "Cadre bois noir large",
-          white_vintage_wide: "Cadre bois blanc vintage",
-          black_vintage_wide: "Cadre bois noir vintage large",
+          white_large: "Cadre bois blanc large",
+          black_large: "Cadre bois noir large",
+          white_vintage_large: "Cadre bois blanc vintage",
+          black_vintage_large: "Cadre bois noir vintage large",
           gold_ancient_large: "Cadre doré antique large",
           gold_vintage: "Cadre doré vintage"
         },
   
-        aluminium: {
+        alu: {
           black: "Cadre aluminium noir mat",
           gold: "Cadre aluminium doré",
           silver: "Cadre aluminium argenté",
@@ -106,15 +106,15 @@ def homothetie_calc
           white: "White wood frame",
           black: "Black wood frame",
           oak: "Oak wood frame",
-          white_wide: "Wide white wood frame",
-          black_wide: "Wide black wood frame",
-          white_vintage_wide: "Vintage wide white wood frame",
-          black_vintage_wide: "Vintage wide black wood frame",
-          gold_ancient_large: "Ancient wide gold frame",
+          white_large: "large white wood frame",
+          black_large: "large black wood frame",
+          white_vintage_large: "Vintage wide white wood frame",
+          black_vintage_large: "Vintage wide black wood frame",
+          gold_ancient_large: "Ancient large gold frame",
           gold_vintage: "vintage gold frame"
         },
   
-        aluminium: {
+        alu: {
           black: "Mat black aluminium frame",
           gold: "Golden aluminium frame",
           silver: "Silver aluminium frame",
@@ -133,15 +133,15 @@ def homothetie_calc
           white: "Weißer Holzrahmen",
           black: "Schwarzer Holzrahmen",
           oak: "Holzrahmen Eiche",
-          white_wide: "Weißer Holzrahmen breit",
-          black_wide: "Schwarzer Holzrahmen breit",
-          white_vintage_wide: "Weißer Holzrahmen breit Vintage",
-          black_vintage_wide: "Schwarzer Holzrahmen breit Vintage",
+          white_large: "Weißer Holzrahmen breit",
+          black_large: "Schwarzer Holzrahmen breit",
+          white_vintage_large: "Weißer Holzrahmen breit Vintage",
+          black_vintage_large: "Schwarzer Holzrahmen breit Vintage",
           gold_ancient_large: "Breiter antiker goldener Holzrahmen",
           gold_vintage: "Goldener Vintage Holzrahmen"
         },
   
-        aluminium: {
+        alu: {
           black: "Mattschwarzer Aluminiumrahmen",
           gold: "Goldener Aluminiumrahmen",
           silver: "Silberner Aluminiumrahmen",
@@ -160,15 +160,15 @@ def homothetie_calc
           white: "Marco de alta calidad",
           black: "Marco de madera negro",
           oak: "Marco de madera de roble",
-          white_wide: "Gran marco de madera blanca",
-          black_wide: "Gran marco de madera negra",
-          white_vintage_wide: "Gran marco blanco de madera vintage",
-          black_vintage_wide: "Gran marco negro de madera vintage",
+          white_large: "Gran marco de madera blanca",
+          black_large: "Gran marco de madera negra",
+          white_vintage_large: "Gran marco blanco de madera vintage",
+          black_vintage_large: "Gran marco negro de madera vintage",
           gold_ancient_large: "Gran marco de madera dorada antigua",
           gold_vintage: "Marco de madera dorada vintage"
         },
   
-        aluminium: {
+        alu: {
           black: "Marco de aluminio negro mate",
           gold: "Marco de aluminio dorado",
           silver: "Marco de aluminio plateado",
@@ -187,15 +187,15 @@ def homothetie_calc
           white: "Telaio in legno bianco",
           black: "Telaio in legno nero",
           oak: "Telaio in legno di quercia",
-          white_wide: "Grande cornice in legno bianco",
-          black_wide: "Grande cornice in legno nero",
-          white_vintage_wide: "Grande cornice in legno bianco vintage",
-          black_vintage_wide: "Grande cornice in legno nero vintage",
+          white_large: "Grande cornice in legno bianco",
+          black_large: "Grande cornice in legno nero",
+          white_vintage_large: "Grande cornice in legno bianco vintage",
+          black_vintage_large: "Grande cornice in legno nero vintage",
           gold_ancient_large: "Cornice larga in legno dorato antico",
           gold_vintage: "Cornice in legno dorato vintage"
         },
   
-        aluminium: {
+        alu: {
           black: "Telaio in alluminio nero opaco",
           gold: "Telaio in alluminio placcato oro",
           silver: "Telaio in alluminio argento",
@@ -214,15 +214,15 @@ def homothetie_calc
           white: "Wit houten frame",
           black: "Zwart houten frame",
           oak: "Eiken houten frame",
-          white_wide: "Grote witte houten lijst",
-          black_wide: "Grote zwarte houten lijst",
-          white_vintage_wide: "Vintage grote witte houten lijst",
-          black_vintage_wide: "Vintage grote zwarte houten lijst",
+          white_large: "Grote witte houten lijst",
+          black_large: "Grote zwarte houten lijst",
+          white_vintage_large: "Vintage grote witte houten lijst",
+          black_vintage_large: "Vintage grote zwarte houten lijst",
           gold_ancient_large: "Grote antieke gouden houten lijst",
           gold_vintage: "Vintage vergulde houten lijst"
         },
   
-        aluminium: {
+        alu: {
           black: "Matzwart aluminium frame",
           gold: "Verguld aluminium frame",
           silver: "Zilverkleurig aluminium frame",
@@ -241,15 +241,15 @@ def homothetie_calc
           white: "Vit träram",
           black: "Svart träram",
           oak: "Ek träram",
-          white_wide: "Stor vit träram",
-          black_wide: "Stor svart träram",
-          white_vintage_wide: "Vintage stor vit träram",
-          black_vintage_wide: "Vintage stor svart träram",
+          white_large: "Stor vit träram",
+          black_large: "Stor svart träram",
+          white_vintage_large: "Vintage stor vit träram",
+          black_vintage_large: "Vintage stor svart träram",
           gold_ancient_large: "Stor träram i antikt guld",
           gold_vintage: "Vintage förgylld träram"
         },
   
-        aluminium: {
+        alu: {
           black: "Matt svart aluminiumram",
           gold: "Förgylld aluminiumram",
           silver: "Silverfärgad aluminiumram",
@@ -290,7 +290,7 @@ def homothetie_calc
       ratio = new_width * 100 / width
       ratio = ratio.round
 
-      puts "\n--------------------------------------------\n\nFile                => #{f}\nDestination Folder  => #{new_size + "/"}\nNew width           => #{new_width}\nNew ratio           => #{ratio}\n\nProcessing          => #{new_name_temp}\n\n"
+      puts "\n--------------------------------------------\n\nFile                => #{f}\nDestination Folder  => #{new_size + "/"}\nNew width           => #{new_width}\nNew ratio           => #{ratio}\n\nProcessing          => #{new_name_temp}\nMaterial            => #{material}\nColor               => #{color}\n"
       mask_name = "FRAME/#{new_size + "-" + new_name}-MASK.jpg"
 
       x=`exiftool -s -s -s -comment #{f}`
@@ -306,7 +306,7 @@ def homothetie_calc
               -mattecolor black -frame #{x} \
               #{mask_name}")
 
-      puts "Mask created        => #{mask_name}"
+      puts "Mask created        => #{mask_name}\n\n"
 
       locales = %i(fr en de es it nl sv)
       locales.each do |locale|
@@ -332,8 +332,9 @@ def homothetie_calc
         resize_format = %w(1000 700 450)
         resize_format.each do |resize|
           new_path_name = "FRAME/#{new_size + "/" + resize + "x" + resize + "/" + new_size + "-" + new_name + "-" + locale.to_s}.jpg"
-          system("yoga image -v --resize #{resize + "x" + resize} --jpeg-quality 90 #{new_name_temp} #{new_path_name}")
-          # system("magick #{new_name_temp} -resize x#{resize} #{new_path_name}") # no optimisation
+          # system("yoga image -v --resize #{resize + "x" + resize} --jpeg-quality 90 #{new_name_temp} #{new_path_name}")
+          system("magick #{new_name_temp} -resize x#{resize} #{new_path_name}") # no optimisation
+          puts "Optimised - #{resize + "x" + resize}"
         end
 
         # DLIP / BLOB
@@ -345,8 +346,9 @@ def homothetie_calc
                 -blur 5x3 \
                 -interlace plane \
                 #{new_dlip_path_name}")
+        puts "Optimised - 1x1"
 
-        p "#{locale} - Image processed !"
+        puts "\n[#{locale.upcase}] - #{new_size} #{placeholder_finition} - Image processed !\n\n"
       end
     end
   end
