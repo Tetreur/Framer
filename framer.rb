@@ -332,8 +332,8 @@ def homothetie_calc
         resize_format = %w(1000 700 450)
         resize_format.each do |resize|
           new_path_name = "FRAME/#{new_size + "/" + resize + "x" + resize + "/" + new_size + "-" + new_name + "-" + locale.to_s}.jpg"
-          # system("yoga image -v --resize #{resize + "x" + resize} --jpeg-quality 90 #{new_name_temp} #{new_path_name}")
-          system("magick #{new_name_temp} -resize x#{resize} #{new_path_name}") # no optimisation
+          system("yoga image -v --resize #{resize + "x" + resize} --jpeg-quality 90 #{new_name_temp} #{new_path_name}")
+          # system("magick #{new_name_temp} -resize x#{resize} #{new_path_name}") # no optimisation
           puts "Optimised - #{resize + "x" + resize}"
         end
 
