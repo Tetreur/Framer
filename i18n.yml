@@ -1,0 +1,191 @@
+lang = {
+    fr: => {
+      premium: "Cadre qualité premium",
+      plexiglas: "Avec plexiglas protecteur",
+      frame: "CADRE",
+  
+      finition: {
+        wood: {
+          white: "Cadre 
+          bois blanc",
+          black: "Cadre bois noir",
+          oak: "Cadre bois chêne",
+          white_wide: "Cadre bois blanc large",
+          black_whide: "Cadre bois noir large",
+          white_vintage_wide: "Cadre bois blanc vintage",
+          black_vintage_wide: "Cadre bois noir vintage large",
+          gold_ancient_large: "Cadre doré antique large",
+          gold_vintage: "Cadre doré vintage"
+        },
+  
+        aluminium: {
+          black: "Cadre aluminium noir mat",
+          gold: "Cadre aluminium doré",
+          silver: "Cadre aluminium argenté",
+          copper: "Cadre aluminium cuivré"
+        }
+      }
+    },
+  
+    en: => {
+      premium: "Premium quality frame",
+      plexiglas: "With protective plexiglas",
+      frame: "FRAME",
+  
+      finition: {
+        wood: {
+          white: "White wood frame",
+          black: "Black wood frame",
+          oak: "Oak wood frame",
+          white_wide: "Wide white wood frame",
+          black_wide: "Wide black wood frame",
+          white_vintage_wide: "Vintage wide white wood frame",
+          black_vintage_wide: "Vintage wide black wood frame",
+          gold_ancient_large: "Ancient wide gold frame",
+          gold_vintage: "vintage gold frame"
+        },
+  
+        aluminium: {
+          black: "Mat black aluminium frame",
+          gold: "Golden aluminium frame",
+          silver: "Silver aluminium frame",
+          copper: "Copper-plated aluminium frame"
+        }
+      }
+    },
+  
+    de: => {
+      premium: "Hochwertiger Rahmen",
+      plexiglas: "Mit schützendem Plexiglas",
+      frame: "RAHMEN",
+  
+      finition: {
+        wood: {
+          white: "Weißer Holzrahmen",
+          black: "Schwarzer Holzrahmen",
+          oak: "Holzrahmen Eiche",
+          white_wide: "Weißer Holzrahmen breit",
+          black_wide: "Schwarzer Holzrahmen breit",
+          white_vintage_wide: "Weißer Holzrahmen breit Vintage",
+          black_vintage_wide: "Schwarzer Holzrahmen breit Vintage",
+          gold_ancient_large: "Breiter antiker goldener Holzrahmen",
+          gold_vintage: "Goldener Vintage-Holzrahmen"
+        },
+  
+        aluminium: {
+          black: "Mattschwarzer Aluminiumrahmen",
+          gold: "Goldener Aluminiumrahmen",
+          silver: "Silberner Aluminiumrahmen",
+          copper: "Kupferfarbener Aluminiumrahmen"
+        }
+      }
+    },
+  
+    es: => {
+      premium: "Marco de alta calidad",
+      plexiglas: "Con plexiglás de protección",
+      frame: "MARCO",
+  
+      finition: {
+        wood: {
+          white: "Marco de alta calidad",
+          black: "Marco de madera negro",
+          oak: "Marco de madera de roble",
+          white_wide: "Gran marco de madera blanca",
+          black_wide: "Gran marco de madera negra",
+          white_vintage_wide: "Gran marco blanco de madera vintage",
+          black_vintage_wide: "Gran marco negro de madera vintage",
+          gold_ancient_large: "Gran marco de madera dorada antigua",
+          gold_vintage: "Marco de madera dorada vintage"
+        },
+  
+        aluminium: {
+          black: "Marco de aluminio negro mate",
+          gold: "Marco de aluminio dorado",
+          silver: "Marco de aluminio plateado",
+          copper: "Marco de aluminio cobrizo"
+        }
+      }
+    },
+  
+    it: => {
+      premium: "Telaio di alta qualità",
+      plexiglas: "Con plexiglass protettivo",
+      frame: "TELAIO",
+  
+      finition: {
+        wood: {
+          white: "Telaio in legno bianco",
+          black: "Telaio in legno nero",
+          oak: "Telaio in legno di quercia",
+          white_wide: "Grande cornice in legno bianco",
+          black_wide: "Grande cornice in legno nero",
+          white_vintage_wide: "Grande cornice in legno bianco vintage",
+          black_vintage_wide: "Grande cornice in legno nero vintage",
+          gold_ancient_large: "Cornice larga in legno dorato antico",
+          gold_vintage: "Cornice in legno dorato vintage"
+        },
+  
+        aluminium: {
+          black: "Telaio in alluminio nero opaco",
+          gold: "Telaio in alluminio placcato oro",
+          silver: "Telaio in alluminio argento",
+          copper: "Telaio in alluminio ramato"
+        }
+      }
+    },
+  
+    nl: => {
+      premium: "Frame van topkwaliteit",
+      plexiglas: "Met beschermend plexiglas",
+      frame: "FRAME",
+  
+      finition: {
+        wood: {
+          white: "Wit houten frame",
+          black: "Zwart houten frame",
+          oak: "Eiken houten frame",
+          white_wide: "Grote witte houten lijst",
+          black_wide: "Grote zwarte houten lijst",
+          white_vintage_wide: "Vintage grote witte houten lijst",
+          black_vintage_wide: "Vintage grote zwarte houten lijst",
+          gold_ancient_large: "Grote antieke gouden houten lijst",
+          gold_vintage: "Vintage vergulde houten lijst"
+        },
+  
+        aluminium: {
+          black: "Matzwart aluminium frame",
+          gold: "Verguld aluminium frame",
+          silver: "Zilverkleurig aluminium frame",
+          copper: "Verkoperd aluminium frame"
+        }
+      }
+    },
+  
+    sv: => {
+      premium: "Högkvalitativ ram",
+      plexiglas: "Med skyddande plexiglas",
+      frame: "RAM",
+  
+      finition: {
+        wood: {
+          white: "Vit träram",
+          black: "Svart träram",
+          oak: "Ek träram",
+          white_wide: "Stor vit träram",
+          black_wide: "Stor svart träram",
+          white_vintage_wide: "Vintage stor vit träram",
+          black_vintage_wide: "Vintage stor svart träram",
+          gold_ancient_large: "Stor träram i antikt guld",
+          gold_vintage: "Vintage förgylld träram"
+        },
+  
+        aluminium: {
+          black: "Matt svart aluminiumram",
+          gold: "Förgylld aluminiumram",
+          silver: "Silverfärgad aluminiumram",
+          copper: "Kopparpläterad aluminiumram"
+        }
+      }
+    }
+  }
