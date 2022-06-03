@@ -34,14 +34,14 @@ files.each do |f|
   if name_base.include?('alu')
 
     baguette = baguette_calc(200.0, name_dimension)
-    system("exiftool -overwrite_original -comment=#{baguette} #{f}")
+    system("exiftool -overwrite_original -comment=#{baguette[0]} #{f}")
 
     system("magick #{f} \
-            \( -size 1000x1000 xc:none -fill white -draw \'fill-opacity 0.4 rectangle #{baguette[1]},#{baguette[1]} #{baguette[0]},#{baguette[0]}\' \) \
+            \\( -size 1000x1000 xc:none -fill white -draw \'fill-opacity 40% rectangle #{baguette[1]/2},#{baguette[1]/2} #{baguette[0] + baguette[1]/2},#{baguette[0] + baguette[1]/2}\' \\) \
             -compose Screen -composite #{f}")
 
     system("magick #{f} -gravity center \\( -clone 0 -crop 936x936+0+0 -resize \"#{baguette[0]}x#{baguette[0]}+0+0\" \\) -geometry +0+0 -composite #{f}")
-    puts "#{f}\nBaguette => #{baguette}\n----------------------\n\n"
+    puts "#{f}\nBaguette => #{baguette[0]}\n----------------------\n\n"
 
   else name_base.include?('wood')
 
@@ -49,26 +49,26 @@ files.each do |f|
       baguette = baguette_calc(800.0, name_dimension)
       system("exiftool -overwrite_original -comment=#{baguette[0]} #{f}")
       system("magick #{f} \
-              \( -size 1000x1000 xc:none -fill white -draw \'fill-opacity 0.4 rectangle #{baguette[1]},#{baguette[1]} #{baguette[0]},#{baguette[0]}\' \) \
+              \\( -size 1000x1000 xc:none -fill white -draw \'fill-opacity 40% rectangle #{baguette[1]/2},#{baguette[1]/2} #{baguette[0] + baguette[1]/2},#{baguette[0] + baguette[1]/2}\' \\) \
               -compose Screen -composite #{f}")
         system("magick #{f} -gravity center \\( -clone 0 -crop 788x788+0+0 -resize \"#{baguette[0]}x#{baguette[0]}+0+0\" \\) -geometry +0+0 -composite #{f}")
       puts "#{f}\nBaguette => #{baguette[0]}\n----------------------\n\n"
 
     elsif name_base.include?("vintage")
 
-      baguette = baguette_calc(860.0, name_dimension)
+      baguette = baguette_calc(878.0, name_dimension)
       system("exiftool -overwrite_original -comment=#{baguette[0]} #{f}")
-      # system("magick #{f} \
-      #         \( -size 1000x1000 xc:none -fill white -draw \'fill-opacity 0.4 rectangle #{baguette[1]},#{baguette[1]} #{baguette[0]},#{baguette[0]}\' \) \
-      #         -compose Screen -composite #{f}")
+      system("magick #{f} \
+              \\( -size 1000x1000 xc:none -fill white -draw \'fill-opacity 40% rectangle #{baguette[1]/2},#{baguette[1]/2} #{baguette[0] + baguette[1]/2},#{baguette[0] + baguette[1]/2}\' \\) \
+              -compose Screen -composite #{f}")
       puts "#{f}\nBaguette => #{baguette[0]}...\n----------------------\n\n"
 
-    elsif name_base.include?("ancient")
+    elsif name_base.include?("antique")
 
       baguette = baguette_calc(475.0, name_dimension)
       system("exiftool -overwrite_original -comment=#{baguette[0]} #{f}")
       system("magick #{f} \
-        \( -size 1000x1000 xc:none -fill white -draw \'fill-opacity 0.4 rectangle #{baguette[1]},#{baguette[1]} #{baguette[0]},#{baguette[0]}\' \) \
+        \\( -size 1000x1000 xc:none -fill white -draw \'fill-opacity 40% rectangle #{baguette[1]/2},#{baguette[1]/2} #{baguette[0] + baguette[1]/2},#{baguette[0] + baguette[1]/2}\' \\) \
         -compose Screen -composite #{f}")
       puts "#{f}\nBaguette => #{baguette[0]}...\n----------------------\n\n"
 
@@ -77,7 +77,7 @@ files.each do |f|
       baguette = baguette_calc(400.0, name_dimension)
       system("exiftool -overwrite_original -comment=#{baguette[0]} #{f}")
       system("magick #{f} \
-              \( -size 1000x1000 xc:none -fill white -draw \'fill-opacity 0.4 rectangle #{baguette[1]},#{baguette[1]} #{baguette[0]},#{baguette[0]}\' \) \
+              \\( -size 1000x1000 xc:none -fill white -draw \'fill-opacity 0.4 rectangle #{baguette[1]/2},#{baguette[1]/2} #{baguette[0] + baguette[1]/2},#{baguette[0] + baguette[1]/2}\' \\) \
               -compose Screen -composite #{f}")
       system("magick #{f} -gravity center \\( -clone 0 -crop 880x880+0+0 -resize \"#{baguette[0]}x#{baguette[0]}+0+0\" \\) -geometry +0+0 -composite #{f}")
       puts "#{f}\nBaguette => #{baguette[0]}\n----------------------\n\n"
@@ -103,7 +103,7 @@ def homothetie_calc
           black_large: "Cadre bois noir large",
           white_vintage_large: "Cadre bois blanc vintage",
           black_vintage_large: "Cadre bois noir vintage large",
-          gold_ancient_large: "Cadre doré antique large",
+          gold_antique_large: "Cadre doré antique large",
           gold_vintage: "Cadre doré vintage"
         },
 
@@ -111,7 +111,8 @@ def homothetie_calc
           black: "Cadre aluminium noir mat",
           gold: "Cadre aluminium doré",
           silver: "Cadre aluminium argenté",
-          copper: "Cadre aluminium cuivré"
+          copper: "Cadre aluminium cuivré",
+          white: "Cadre aluminium blanc"
         }
       }
     },
@@ -130,7 +131,7 @@ def homothetie_calc
           black_large: "large black wood frame",
           white_vintage_large: "Vintage wide white wood frame",
           black_vintage_large: "Vintage wide black wood frame",
-          gold_ancient_large: "Ancient large gold frame",
+          gold_antique_large: "Ancient large gold frame",
           gold_vintage: "vintage gold frame"
         },
 
@@ -138,7 +139,8 @@ def homothetie_calc
           black: "Mat black aluminium frame",
           gold: "Golden aluminium frame",
           silver: "Silver aluminium frame",
-          copper: "Copper-plated aluminium frame"
+          copper: "Copper aluminium frame",
+          white: "White aluminium frame"
         }
       }
     },
@@ -157,7 +159,7 @@ def homothetie_calc
           black_large: "Schwarzer Holzrahmen breit",
           white_vintage_large: "Weißer Holzrahmen breit Vintage",
           black_vintage_large: "Schwarzer Holzrahmen breit Vintage",
-          gold_ancient_large: "Breiter antiker goldener Holzrahmen",
+          gold_antique_large: "Breiter antiker goldener Holzrahmen",
           gold_vintage: "Goldener Vintage Holzrahmen"
         },
 
@@ -165,7 +167,8 @@ def homothetie_calc
           black: "Mattschwarzer Aluminiumrahmen",
           gold: "Goldener Aluminiumrahmen",
           silver: "Silberner Aluminiumrahmen",
-          copper: "Kupferfarbener Aluminiumrahmen"
+          copper: "Kupferfarbener Aluminiumrahmen",
+          white: "Weißer Aluminiumrahmen"
         }
       }
     },
@@ -184,7 +187,7 @@ def homothetie_calc
           black_large: "Gran marco de madera negra",
           white_vintage_large: "Gran marco blanco de madera vintage",
           black_vintage_large: "Gran marco negro de madera vintage",
-          gold_ancient_large: "Gran marco de madera dorada antigua",
+          gold_antique_large: "Gran marco de madera dorada antigua",
           gold_vintage: "Marco de madera dorada vintage"
         },
 
@@ -192,7 +195,8 @@ def homothetie_calc
           black: "Marco de aluminio negro mate",
           gold: "Marco de aluminio dorado",
           silver: "Marco de aluminio plateado",
-          copper: "Marco de aluminio cobrizo"
+          copper: "Marco de aluminio cobrizo",
+          white: "Marco de aluminio blanco"
         }
       }
     },
@@ -211,7 +215,7 @@ def homothetie_calc
           black_large: "Grande cornice in legno nero",
           white_vintage_large: "Grande cornice in legno bianco vintage",
           black_vintage_large: "Grande cornice in legno nero vintage",
-          gold_ancient_large: "Cornice larga in legno dorato antico",
+          gold_antique_large: "Cornice larga in legno dorato antico",
           gold_vintage: "Cornice in legno dorato vintage"
         },
 
@@ -219,7 +223,8 @@ def homothetie_calc
           black: "Telaio in alluminio nero opaco",
           gold: "Telaio in alluminio placcato oro",
           silver: "Telaio in alluminio argento",
-          copper: "Telaio in alluminio ramato"
+          copper: "Telaio in alluminio ramato",
+          white: "Telaio in alluminio bianco"
         }
       }
     },
@@ -238,7 +243,7 @@ def homothetie_calc
           black_large: "Grote zwarte houten lijst",
           white_vintage_large: "Vintage grote witte houten lijst",
           black_vintage_large: "Vintage grote zwarte houten lijst",
-          gold_ancient_large: "Grote antieke gouden houten lijst",
+          gold_antique_large: "Grote antieke gouden houten lijst",
           gold_vintage: "Vintage vergulde houten lijst"
         },
 
@@ -246,7 +251,8 @@ def homothetie_calc
           black: "Matzwart aluminium frame",
           gold: "Verguld aluminium frame",
           silver: "Zilverkleurig aluminium frame",
-          copper: "Verkoperd aluminium frame"
+          copper: "Verkoperd aluminium frame",
+          white: "Wit aluminium frame"
         }
       }
     },
@@ -265,7 +271,7 @@ def homothetie_calc
           black_large: "Stor svart träram",
           white_vintage_large: "Vintage stor vit träram",
           black_vintage_large: "Vintage stor svart träram",
-          gold_ancient_large: "Stor träram i antikt guld",
+          gold_antique_large: "Stor träram i antikt guld",
           gold_vintage: "Vintage förgylld träram"
         },
 
@@ -273,7 +279,8 @@ def homothetie_calc
           black: "Matt svart aluminiumram",
           gold: "Förgylld aluminiumram",
           silver: "Silverfärgad aluminiumram",
-          copper: "Kopparpläterad aluminiumram"
+          copper: "Kopparpläterad aluminiumram",
+          white: "Vit aluminiumram"
         }
       }
     }
@@ -291,84 +298,97 @@ def homothetie_calc
     '70x70' =>      ['50x70', '70x70'],
     '75x75' =>      ['50x75'],
     '80x80' =>      ['60x80', '80x80'],
-    '90x90' =>      ['60x90', '70x90'],
-    '100x100' =>    ['50x100', '70x100'],
+    '90x90' =>      ['60x90', '70x90', '90x90'],
+    '100x100' =>    ['50x100', '70x100', '100x100'],
     '120x120' =>    ['80x120'], # On ne vend pas pour l'instant
     '140x140' =>    ['100x140'] # On ne vend pas pour l'instant
   }
 
   Dir.glob('FRAME/*.jpg').each do |f|
+    begin
+      size, material, color, style, thickness = f.split('/').last[0..-5].split('_')
+      width, height = size.split('x').map(&:to_f)
+      new_name = [material, color, style, thickness].reject(&:nil?).join('-')
 
-    size, material, color, style, thickness = f.split('/').last[0..-5].split('_')
-    width, height = size.split('x').map(&:to_f)
-    new_name = [material, color, style, thickness].reject(&:nil?).join('-')
+      size_to_resizes[size].each do |new_size|
 
-    size_to_resizes[size].each do |new_size|
+        new_width, new_height = new_size.split('x').map(&:to_f)
+        new_name_temp = "FRAME/#{new_size + "-" + new_name}.jpg"
+        ratio = new_width * 100 / width
+        ratio = ratio.round
 
-      new_width, new_height = new_size.split('x').map(&:to_f)
-      new_name_temp = "FRAME/#{new_size + "-" + new_name}.jpg"
-      ratio = new_width * 100 / width
-      ratio = ratio.round
+        puts "\n--------------------------------------------\n\n📄 File                => #{f}\n📁 Destination Folder  => #{new_size + "/"}\n📏 New width           => #{new_width}\n📐 New ratio           => #{ratio}\n\n📀 Processing          => #{new_name_temp}\n🔧 Material            => #{material}\n🎨 Color               => #{color}\n"
+        mask_name = "FRAME/#{new_size + "-" + new_name}-MASK.jpg"
 
-      puts "\n--------------------------------------------\n\nFile                => #{f}\nDestination Folder  => #{new_size + "/"}\nNew width           => #{new_width}\nNew ratio           => #{ratio}\n\nProcessing          => #{new_name_temp}\nMaterial            => #{material}\nColor               => #{color}\n"
-      mask_name = "FRAME/#{new_size + "-" + new_name}-MASK.jpg"
+        x=`exiftool -s -s -s -comment #{f}`
+        x = x.to_f.round
+        x = 1000 - x
+        x /= 2
 
-      x=`exiftool -s -s -s -comment #{f}`
-      x = x.to_f.round
-      x = 1000 - x
-      x /= 2
+        puts "📏 Baguette's width    => #{x}px"
 
-      puts "Baguette's width    => #{x}px"
+        system("magick -size 1000x1000 xc:white \
+                -liquid-rescale #{ratio}x100% \
+                -shave #{x}x#{x} \
+                -mattecolor black -frame #{x} \
+                #{mask_name}")
 
-      system("magick -size 1000x1000 xc:white \
-              -liquid-rescale #{ratio}x100% \
-              -shave #{x}x#{x} \
-              -mattecolor black -frame #{x} \
-              #{mask_name}")
+        puts "🎭 Mask created        => #{mask_name}\n\n"
+        flags   = {
+          'fr' => "🇫🇷",
+          'en' => "🇬🇧",
+          'de' => "🇩🇪",
+          'it' => "🇮🇹",
+          'es' => "🇪🇸",
+          'nl' => "🇳🇱",
+          'sv' => "🇸🇪"
+        }
+        locales = %i(fr en de es it nl sv)
+        locales.each do |locale|
 
-      puts "Mask created        => #{mask_name}\n\n"
+          placeholder_finition  = lang[locale][:finition][material.to_sym][[color, style, thickness].reject(&:nil?).join('_').to_sym].upcase
+          placeholder_premium   = lang[locale][:premium].upcase
+          placeholder_plexiglas = lang[locale][:plexiglas].upcase
 
-      locales = %i(fr en de es it nl sv)
-      locales.each do |locale|
+          system("magick #{f} -liquid-rescale #{ratio}x100% \
+                  -font GTEestiProText-Bold -pointsize 100 -kerning 2 \
+                  -gravity center -fill '#04150E' -annotate +0-50 #{new_size} \
+                  -background none -size 400x -font GTEestiProText-Medium -pointsize 23 -kerning 3 -fill '#04150E' \
+                  caption:'#{placeholder_finition}' \
+                  -gravity center -geometry +0+20 -compose over -composite \
+                  -background none -fill '#04150E' -font GTEestiProText-Medium -pointsize 20 -interline-spacing 6 -kerning 2 \
+                  -gravity center -annotate +0-300 '#{placeholder_premium}\n#{placeholder_plexiglas}' \
+                  LOGO.png -geometry +0+275 -composite \
+                  #{new_name_temp}")
 
-        placeholder_finition  = lang[locale][:finition][material.to_sym][[color, style, thickness].reject(&:nil?).join('_').to_sym].upcase
-        placeholder_premium   = lang[locale][:premium].upcase
-        placeholder_plexiglas = lang[locale][:plexiglas].upcase
+          system("composite -compose Screen REFLECTION/#{rand(1..3)}.png #{new_name_temp} #{mask_name} #{new_name_temp}")
 
-        system("magick #{f} -liquid-rescale #{ratio}x100% \
-                -font GTEestiProText-Bold -pointsize 100 -kerning 2 \
-                -gravity center -fill '#04150E' -annotate +0-50 #{new_size} \
-                -background none -size 400x -font GTEestiProText-Medium -pointsize 23 -kerning 3 -fill '#04150E' \
-                caption:'#{placeholder_finition}' \
-                -gravity center -geometry +0+20 -compose over -composite \
-                -background none -fill '#04150E' -font GTEestiProText-Medium -pointsize 20 -interline-spacing 6 -kerning 2 \
-                -gravity center -annotate +0-300 '#{placeholder_premium}\n#{placeholder_plexiglas}' \
-                LOGO.png -geometry +0+275 -composite \
-                #{new_name_temp}")
+          resize_format = %w(1000 700 450)
+          resize_format.each do |resize|
+            new_path_name = "FRAME/#{new_size + "/" + resize + "x" + resize + "/" + new_size + "-" + new_name + "-" + locale.to_s}.jpg"
+            # system("yoga image -v --resize #{resize + "x" + resize} --jpeg-quality 90 #{new_name_temp} #{new_path_name}")
+            system("magick #{new_name_temp} -resize x#{resize} #{new_path_name}") # no optimisation
+            puts "Optimised - #{resize + "x" + resize}"
+          end
 
-        system("composite -compose Screen REFLECTION/#{rand(1..3)}.png #{new_name_temp} #{mask_name} #{new_name_temp}")
+          # DLIP / BLOB
 
-        # resize_format = %w(1000 700 450)
-        # resize_format.each do |resize|
-        #   new_path_name = "FRAME/#{new_size + "/" + resize + "x" + resize + "/" + new_size + "-" + new_name + "-" + locale.to_s}.jpg"
-        #   # system("yoga image -v --resize #{resize + "x" + resize} --jpeg-quality 90 #{new_name_temp} #{new_path_name}")
-        #   system("magick #{new_name_temp} -resize x#{resize} #{new_path_name}") # no optimisation
-        #   puts "Optimised - #{resize + "x" + resize}"
-        # end
-
-        # # DLIP / BLOB
-
-        # new_dlip_path_name = "FRAME/#{new_size + "/1x1/" + new_size + "-" + new_name + "-" + locale.to_s}.jpg"
-        # system("magick #{new_name_temp} -strip \
-        #         -resize x450 \
-        #         -quality 20% \
-        #         -blur 5x3 \
-        #         -interlace plane \
-        #         #{new_dlip_path_name}")
-        # puts "Optimised - 1x1"
-
-        # puts "\n[#{locale.upcase}] - #{new_size} #{placeholder_finition} - Image processed !\n\n"
+          new_dlip_path_name = "FRAME/#{new_size + "/1x1/" + new_size + "-" + new_name + "-" + locale.to_s}.jpg"
+          system("magick #{new_name_temp} -strip \
+                  -resize x450 \
+                  -quality 20% \
+                  -blur 5x3 \
+                  -interlace plane \
+                  #{new_dlip_path_name}")
+          puts "Optimised - 1x1"
+          puts ""
+          puts "\n#{flags[locale.to_s]} ⟶ #{new_size} #{placeholder_finition} - Image processed !\n\n"
+        end
       end
+    rescue => error
+      p error
+      p f
+      next
     end
   end
 end
