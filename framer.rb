@@ -290,7 +290,7 @@ def homothetie_calc
     '29.7x29.7' =>  ['21x29.7'],
     '30x30' =>      ['20x30', '30x30'],
     '40x40' =>      ['30x40', '40x40'],
-    '42x42' =>      ['29.7x42'],
+    '42x42' =>      ['30x45', '29.7x42'],
     '50x50' =>      ['35x50', '40x50', '50x50'],
     '59.4x59.4' =>  ['42x59.4'],
     '60x60' =>      ['40x60', '45x60', '50x60', '60x60'],
@@ -304,6 +304,8 @@ def homothetie_calc
     '140x140' =>    ['100x140'] # On ne vend pas pour l'instant
   }
 
+  system("magick -size 446x768 xc:white -fill black -draw 'roundrectangle 47,54 399,115 20,20' -fill black -draw 'roundrectangle 25,275 421,435 15,15' -fill black -draw 'roundrectangle 162,617 285,702 10,10' -blur 0x15 FRAME/antimask.jpg")
+
   Dir.glob('FRAME/*.jpg').each do |f|
     begin
       size, material, color, style, thickness = f.split('/').last[0..-5].split('_')
@@ -314,10 +316,12 @@ def homothetie_calc
 
         new_width, new_height = new_size.split('x').map(&:to_f)
         new_name_temp = "FRAME/#{new_size + "-" + new_name}.jpg"
+        new_name_placeholder = "FRAME/#{new_size + "-" + new_name}-placeholder.jpg"
         ratio = new_width * 100 / width
         ratio = ratio.round
 
         puts "\n--------------------------------------------\n\n📄 File                => #{f}\n📁 Destination Folder  => #{new_size + "/"}\n📏 New width           => #{new_width}\n📐 New ratio           => #{ratio}\n\n📀 Processing          => #{new_name_temp}\n🔧 Material            => #{material}\n🎨 Color               => #{color}\n"
+        mask_name_temp = "FRAME/#{new_size + "-" + new_name}-MASKTEMP.jpg"
         mask_name = "FRAME/#{new_size + "-" + new_name}-MASK.jpg"
 
         x=`exiftool -s -s -s -comment #{f}`
@@ -331,7 +335,10 @@ def homothetie_calc
                 -liquid-rescale #{ratio}x100% \
                 -shave #{x}x#{x} \
                 -mattecolor black -frame #{x} \
-                #{mask_name}")
+                #{mask_name_temp}")
+
+        system("composite -gravity center FRAME/antimask.jpg #{mask_name_temp} #{mask_name}")
+        system("rm -f #{mask_name_temp}") # ADDITIONNER LES DEUX MASK
 
         puts "🎭 Mask created        => #{mask_name}\n\n"
         flags   = {
@@ -343,12 +350,14 @@ def homothetie_calc
           'nl' => "🇳🇱",
           'sv' => "🇸🇪"
         }
-        locales = %i(fr en de es it nl sv)
+        locales = %i(fr en de it es nl sv)
         locales.each do |locale|
 
           placeholder_finition  = lang[locale][:finition][material.to_sym][[color, style, thickness].reject(&:nil?).join('_').to_sym].upcase
           placeholder_premium   = lang[locale][:premium].upcase
           placeholder_plexiglas = lang[locale][:plexiglas].upcase
+
+          # IMG
 
           system("magick #{f} -liquid-rescale #{ratio}x100% \
                   -font GTEestiProText-Bold -pointsize 100 -kerning 2 \
@@ -361,19 +370,33 @@ def homothetie_calc
                   LOGO.png -geometry +0+275 -composite \
                   #{new_name_temp}")
 
+          # PLACEHOLDER >>
+
+          # system("magick #{f} -liquid-rescale #{ratio}x100% -scale x2000\
+          #         -fill white -colorize 100 \
+          #         -font GTEestiProText-Bold -pointsize 225 -kerning 2 \
+          #         -gravity center -fill '#04150E' -annotate +0-100 #{new_size} \
+          #         -background none -size 800x -font GTEestiProText-Medium -pointsize 52 -kerning 3 -fill '#04150E' \
+          #         caption:'#{placeholder_finition}' \
+          #         -gravity center -geometry +0+40 -compose over -composite \
+          #         -background none -fill '#04150E' -font GTEestiProText-Medium -pointsize 52 -interline-spacing 6 -kerning 2 \
+          #         -gravity center -annotate +0-600 '#{placeholder_premium}\n#{placeholder_plexiglas}' \
+          #         LOGO-BIG.png -geometry +0+600 -composite \
+          #         #{new_name_placeholder}")
+
           system("composite -compose Screen REFLECTION/#{rand(1..3)}.png #{new_name_temp} #{mask_name} #{new_name_temp}")
 
           resize_format = %w(1000 700 450)
           resize_format.each do |resize|
             new_path_name = "FRAME/#{new_size + "/" + resize + "x" + resize + "/" + new_size + "-" + new_name + "-" + locale.to_s}.jpg"
-            # system("yoga image -v --resize #{resize + "x" + resize} --jpeg-quality 90 #{new_name_temp} #{new_path_name}")
-            system("magick #{new_name_temp} -resize x#{resize} #{new_path_name}") # no optimisation
+            system("yoga image -v --resize #{resize + "x" + resize} --jpeg-quality 90 #{new_name_temp} #{new_path_name}")
+            # system("magick #{new_name_temp} -resize x#{resize} #{new_path_name}") # no optimisation
             puts "Optimised - #{resize + "x" + resize}"
           end
 
           # DLIP / BLOB
 
-          new_dlip_path_name = "FRAME/#{new_size + "/1x1/" + new_size + "-" + new_name + "-" + locale.to_s}.jpg"
+          new_dlip_path_name = "FRAME/#{new_size + "/1x1/" + new_size + "-" + new_name}.jpg"
           system("magick #{new_name_temp} -strip \
                   -resize x450 \
                   -quality 20% \
